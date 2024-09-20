@@ -42,8 +42,9 @@ async def run_app(args):
     loop.add_signal_handler(signal.SIGTERM, sigterm_handler)
 
     node = nodes.Node(args.persistence_path)
-    for s in args.blacklist_if:
-        node.blacklist_if_prefix(s)
+    if args.blacklist_if is not None:
+        for s in args.blacklist_if:
+            node.blacklist_if_prefix(s)
 
     network_ok = asyncio.Event()
     if args.join is not None:

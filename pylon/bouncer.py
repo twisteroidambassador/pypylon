@@ -373,6 +373,7 @@ class Bouncer:
                 return
 
             log_label = f'[{client_side} {client_address} {command.name}({address}, {port}) ==> ]'
+            logger.debug('%s command received', log_label)
 
             if command in {pylon.socks.SOCKS5Command.BIND, pylon.socks.SOCKS5Command.UDP_ASSOCIATE}:
                 logger.info('%s command %r not yet supported', log_label, command)
