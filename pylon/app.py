@@ -172,7 +172,7 @@ def main():
     )
     parser.add_argument(
         '-O', '--outside-bind', action='append',
-        help='Bind the "outside" SOCKS5 proxy server to this address. Can be specified multiple times.'
+        help='Bind the "outside" SOCKS5 proxy server to this address. Can be specified multiple times. '
              'When unspecified (and --outside-port is specified), binds to the wildcard address.',
     )
     parser.add_argument(
@@ -181,7 +181,7 @@ def main():
     )
     parser.add_argument(
         '-Z', '--zts-bind', action='append',
-        help='Bind the ZeroTier SOCKS5 proxy server to this address. Can be specified multiple times.'
+        help='Bind the ZeroTier SOCKS5 proxy server to this address. Can be specified multiple times. '
              'When unspecified (and --zts-port is specified), binds to the wildcard address.',
     )
     parser.add_argument(
