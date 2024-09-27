@@ -34,6 +34,10 @@ but `libzt` has not implemented them.
 Python 3.11 is required for now.
 (Python 3.12 is untested, and probably won't work yet.)
 
+This requires my personal fork of `libzt`, which can be found here: https://github.com/twisteroidambassador/libzt
+The install methods below all use prebuilt wheels hosted there,
+but you can always build from source if you prefer.
+
 ### Native Install
 
 ```shell
