@@ -1,0 +1,4 @@
+async_stagger==0.4.0.post1
+dnspython==2.6.1
+libzt @ https://github.com/twisteroidambassador/libzt/releases/download/20240927-083328/libzt-1.8.10-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl#sha256=b8ed67f4908cce71faca0a13d5bf02d35d7a7a56e2c925c8f09107c292657d0e
+pytricia==1.0.2
