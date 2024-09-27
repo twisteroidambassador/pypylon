@@ -11,9 +11,13 @@ with extra features.
 
 ## Features
 
-- Listening on native or ZeroTier network, forwarding traffic to ZeroTier or native network
+(Features not supported by the original pylon is in bold)
+
+- Listening on native or ZeroTier network, forwarding traffic to ZeroTier or native network 
+(i.e. proxying into ZeroTier or **out of ZeroTier**)
+- Supports IPv4 and **IPv6** inside ZeroTier networks
 - Supports SOCKS5 CONNECT command (initiating TCP connections)
-- Supports DNS servers configured on ZeroTier networks just like recent versions of ZeroTier client
+- **Supports DNS servers configured on ZeroTier networks just like recent versions of ZeroTier client**
 - Can join multiple ZeroTier networks simultaneously
 - Runs in userspace: no root needed, does not create a tap interface, etc.
 
@@ -25,18 +29,63 @@ This seems to be a `libzt` limitation,
 as `lwIP` does support static routes,
 but `libzt` has not implemented them.
 
-## Usage
+## Installation
 
 Python 3.11 is required for now.
 (Python 3.12 is untested, and probably won't work yet.)
 
-The short version:
+### Native Install
 
-Make a virtualenv,
-build and install [my fork of `libzt`](https://github.com/twisteroidambassador/libzt),
-install *async_stagger*, *dnspython* and *pytricia*,
-`cd` into this repository,
-and run `python -m pylon`.
+```shell
+# Clone this repository (or download the code, whichever way you prefer)
+$ git clone https://github.com/twisteroidambassador/pypylon.git
+$ cd pypylon
+# Create a virtual env
+$ python3.11 -m venv venv
+$ . venv/bin/activate
+# Install dependencies
+$ pip install -r requirements.txt
+# Run pylon
+$ python -m pylon --help
+```
 
-A packaged container image is coming soon.
+### Container Install (Docker, Podman, etc.)
 
+Personally, I would recommend using a native install.
+Nevertheless, a container image is available in the [Packages](https://github.com/twisteroidambassador/pypylon/pkgs/container/pypylon) section of this repo.
+
+To see the help message, do something like this:
+
+```shell
+$ docker run --rm -it ghcr.io/twisteroidambassador/pypylon:main --help
+```
+
+Note the following when using the container image:
+
+- Pylon, and ZeroTier in general,
+takes advantage of globally routable IPv6 addresses and native access to network interfaces.
+Use a networking configuration that allows native host network access if possible.
+Also, the interface names inside containers may be different from native interfaces,
+so take care when using `--blacklist-if`.
+
+- Remember to persist node data, by mounting a directory inside the container, using a volume, etc.
+
+
+# Usage
+
+Quick start:
+
+```shell
+python -m pylon -v -J 0123456789abcdef -o 1080 --block-outside-dest ./node
+```
+
+This will persist node data in `./node`,
+join network `0123456789abcdef` (and wait for it to be online before starting the proxy server),
+run a SOCKS5 proxy server listening on the outside on port 1080,
+and only allow proxying into the ZeroTier network.
+
+The log level is increased to INFO,
+so the node ID is printed in the logs.
+Remember to authorize this node in your network controller.
+
+For more info, look at the help messages.
