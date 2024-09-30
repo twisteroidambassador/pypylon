@@ -11,6 +11,7 @@ assert libzt.ZTS_AF_INET6 == socket.AF_INET6
 assert libzt.ZTS_AF_UNSPEC == socket.AF_UNSPEC
 assert libzt.ZTS_IPPROTO_TCP == socket.IPPROTO_TCP
 assert libzt.ZTS_IPPROTO_UDP == socket.IPPROTO_UDP
+assert libzt.ZTS_TCP_NODELAY == socket.TCP_NODELAY
 
 assert libzt.ZTS_SHUT_WR == socket.SHUT_WR
 assert libzt.ZTS_SHUT_RD == socket.SHUT_RD
