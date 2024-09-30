@@ -444,3 +444,9 @@ class LibztSelectorEventLoop(asyncio.selector_events.BaseSelectorEventLoop):
 
 class LibztSelectorSocketTransport(asyncio.selector_events._SelectorSocketTransport):
     _sendfile_compatible = asyncio.constants._SendfileMode.FALLBACK
+
+    def __init__(self, loop, sock, protocol, waiter=None,
+                 extra=None, server=None):
+        super().__init__(loop, sock, protocol, waiter, extra, server)
+        if hasattr(self, '_write_sendmsg') and self._write_ready == self._write_sendmsg:
+            self._write_ready = self._write_send
