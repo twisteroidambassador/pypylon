@@ -31,8 +31,8 @@ but `libzt` has not implemented them.
 
 ## Installation
 
-Python 3.11 is required for now.
-(Python 3.12 is untested, and probably won't work yet.)
+Python 3.11 or newer is required.
+(Python 3.12 is now supported.)
 
 This requires my personal fork of `libzt`, which can be found here: https://github.com/twisteroidambassador/libzt
 The install methods below all use prebuilt wheels hosted there,
@@ -88,8 +88,17 @@ join network `0123456789abcdef` (and wait for it to be online before starting th
 run a SOCKS5 proxy server listening on the outside on port 1080,
 and only allow proxying into the ZeroTier network.
 
-The log level is increased to INFO,
-so the node ID is printed in the logs.
+The `-v` argument prints informational logs,
+so the node ID is printed.
 Remember to authorize this node in your network controller.
 
 For more info, look at the help messages.
+
+
+# Remarks
+
+`pypylon` has graceful shutdown.
+When it receives SIGTERM,
+it will close its server sockets,
+and wait until all in-progress proxy requests to finish before closing.
+(I couldn't make it to work with SIGINT, for some yet undiscovered reason.)
